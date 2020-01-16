@@ -1,0 +1,26 @@
+#cart{
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#cartBtn{
+    text-align: right;
+}
+form{
+    margin-top: 20px;
+    text-align: center;
+}
+.card{
+    margin: 30px;
+}
+img{
+    max-width: 200px;
+    max-height: 200px;
+    margin: 40px;
+}
+#warenkorbLink{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
