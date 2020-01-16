@@ -23,6 +23,7 @@ fetch('./data/products.json')
 
             var input = document.createElement("input");
             input.setAttribute("type","submit");
+            input.setAttribute("name","ProductDetails")
             input.setAttribute("value","Product" + " " + data[i].productName);
 
             var img = document.createElement("img");

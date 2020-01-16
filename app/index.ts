@@ -1,6 +1,6 @@
 "use strict";
 import express = require("express");
-import expressSession = require("express-session");
+const expressSession = require("express-session")
 import {check, validationResult} from "express-validator";
 import * as path from "path";
 import * as fs from "fs";
@@ -9,6 +9,7 @@ import * as Mustache from "mustache";
 import * as data from './data/products.json';
 
 const app = express();
+;
 
 //Paths
 app.use(express.static(__dirname + '/assets'));
@@ -28,9 +29,11 @@ app.use(expressSession({
 }));
 
 /* frontend*/
-app.get("/", (req, res) => {
+app.get("/", (req, res,) => {
     sendTemplate("master.html", "home.html", {})
         .then(rendered => res.send(rendered));
+    req.session;
+    console.log(req.sessionID);
 });
 
 app.get("/home", (req, res) => {
@@ -52,6 +55,7 @@ app.get('/add-products.js', (req,res) =>{
 })
 
 
+
 const sendTemplate = (masterPage: string, contentPage: string, obj: any) => {
     return new Promise((resolve) => {
         fs.readFile(path.join(__dirname, "views", masterPage), "utf8", (err, master) => {
@@ -61,6 +65,10 @@ const sendTemplate = (masterPage: string, contentPage: string, obj: any) => {
         });
     });    
 }
+app.post("/details",(req,res) =>{
+    sendTemplate("master.html", "details.html", {})
+        .then(rendered => res.send(rendered));
+});
 
 //form validierung
 app.post("/checkout", [

@@ -15,6 +15,7 @@ var fs = __importStar(require("fs"));
 var bodyParser = __importStar(require("body-parser"));
 var Mustache = __importStar(require("mustache"));
 var app = express();
+;
 //Paths
 app.use(express.static(__dirname + '/assets'));
 app.use("/add-products.js", express.static(path.join(__dirname, "./add-products.js")));
@@ -32,6 +33,7 @@ app.use(expressSession({
 app.get("/", function (req, res) {
     sendTemplate("master.html", "home.html", {})
         .then(function (rendered) { return res.send(rendered); });
+    req.session || [];
 });
 app.get("/home", function (req, res) {
     res.redirect('/');

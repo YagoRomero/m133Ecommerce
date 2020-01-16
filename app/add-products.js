@@ -20,6 +20,7 @@ function appendData(data) {
         form.setAttribute("method", "POST");
         var input = document.createElement("input");
         input.setAttribute("type", "submit");
+        input.setAttribute("name", "ProductDetails");
         input.setAttribute("value", "Product" + " " + data[i].productName);
         var img = document.createElement("img");
         img.setAttribute("src", "/images/" + data[i].imageName);
