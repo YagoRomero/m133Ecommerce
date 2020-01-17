@@ -24,11 +24,35 @@ fetch('./data/products.json')
             var input = document.createElement("input");
             input.setAttribute("type","submit");
             input.setAttribute("name","ProductDetails")
-            input.setAttribute("value","Product" + " " + data[i].productName);
+            input.setAttribute("value",data[i].productName);
 
+            var input2 = document.createElement("input");
+            input2.setAttribute("type","hidden");
+            input2.setAttribute("name","ProductFoto")
+            input2.setAttribute("value",data[i].imageName);
+
+            var input3 = document.createElement("input");
+            input3.setAttribute("type","hidden");
+            input3.setAttribute("name","ProductDescription")
+            input3.setAttribute("value",data[i].description);
+            
+            var input4 = document.createElement("input");
+            input4.setAttribute("type","hidden");
+            input4.setAttribute("name","ProductSpecialOffer")
+            input4.setAttribute("value", data[i].specialOffer);
+
+            var input5 = document.createElement("input");
+            input5.setAttribute("type","hidden");
+            input5.setAttribute("name","ProductNormalPrice")
+            input5.setAttribute("value", data[i].normalPrice);
+            
             var img = document.createElement("img");
             img.setAttribute("src","/images/"+data[i].imageName);
             
+            input.appendChild(input5);
+            input.appendChild(input4);
+            input.appendChild(input3);
+            input.appendChild(input2);
             form.appendChild(img)
             form.appendChild(input);
             div.appendChild(form)

@@ -8,18 +8,20 @@ import * as bodyParser from "body-parser";
 import * as Mustache from "mustache";
 import * as data from './data/products.json';
 
+
 const app = express();
-;
 
 //Paths
 app.use(express.static(__dirname + '/assets'));
 app.use("/add-products.js", express.static(path.join(__dirname, "./add-products.js")));
+app.use("/add-details.js", express.static(path.join(__dirname, "./add-details.js")));
 app.use("/data/products.json", express.static(path.join(__dirname, "./data/products.json")));
 app.use("/images", express.static(path.join(__dirname, "./assets/images")));
+app.use("/views", express.static(path.join(__dirname, "./views")));
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Session
 app.use(expressSession({
@@ -50,8 +52,34 @@ app.get("/checkout", (req,res) => {
         .then(rendered => res.send(rendered));
 });
 
+app.post('/details',(req,res) =>{
+    res.send(`
+    <form action="/warenkorb" method="POST">
+        <input type name="cart" value="${req.body.ProductDetails}" readonly="readonly">
+        <input type="submit" value="Put in basket"></input>           
+    </form>
+    <div>
+    <img src=/images/${req.body.ProductFoto}>
+    </div>
+    <div>
+    <h5>${req.body.ProductDescription}</p>
+    </div>
+    <div>
+    <h4>${req.body.ProductSpecialOffer}</p>
+    </div>
+    <div>
+    <h4>${req.body.ProductNormalPrice}</p>
+    </div>
+        `
+    )
+});
+
 app.get('/add-products.js', (req,res) =>{
     res.sendFile("./add-products.js");
+})
+
+app.get('/add-details.js', (req,res) =>{
+    res.sendFile("./add-details.js");
 })
 
 
@@ -65,10 +93,7 @@ const sendTemplate = (masterPage: string, contentPage: string, obj: any) => {
         });
     });    
 }
-app.post("/details",(req,res) =>{
-    sendTemplate("master.html", "details.html", {})
-        .then(rendered => res.send(rendered));
-});
+
 
 //form validierung
 app.post("/checkout", [
