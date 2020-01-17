@@ -9,9 +9,7 @@ form{
     margin-top: 20px;
     text-align: center;
 }
-.card{
-    margin: 30px;
-}
+
 img{
     max-width: 200px;
     max-height: 200px;
@@ -20,7 +18,22 @@ img{
 #warenkorbLink{
     text-decoration: none;
     font-weight: bold;
-    color: white;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
+}
+.form-control{
+    margin: 10px;
+    width: fit-content;
+}
+input{
+    font-size: 40px;
+    margin:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: fit-content;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px; 
+    margin: 10px;
 }
