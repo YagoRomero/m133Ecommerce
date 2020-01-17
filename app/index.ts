@@ -144,7 +144,7 @@ app.post("/warenkorb", (req, res) => {
                             var resultat = document.getElementById("resultat").innerHTML = " ";
                             var countSpecial = document.getElementById("countNormal").value = 0;
                         }
-                        </script>
+               </script>
             <body>
         `);
     }
