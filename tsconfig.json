@@ -2,7 +2,6 @@
   "files": [
     "./app/index.ts",
     "./app/add-products.ts",
-    "./app/add-details.ts"
   ],
   "compilerOptions": {
     /* Basic Options */
