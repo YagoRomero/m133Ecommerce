@@ -104,6 +104,6 @@ dist
 .tern-port
 
 #JavaScript files
-*.js
+**/app/*.js
 *.map
-*.d.ts
+**/app/*.d.ts
