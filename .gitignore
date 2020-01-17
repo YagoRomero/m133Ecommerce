@@ -104,5 +104,4 @@ dist
 .tern-port
 
 #JavaScript files
-m133Ecommerce/app/index.js
-m133Ecommerce/app/add-products.js
+*/app/*.js
