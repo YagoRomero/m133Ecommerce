@@ -42,10 +42,18 @@ app.get("/home", (req, res) => {
    res.redirect('/');
 });
 
-app.get("/warenkorb", (req, res) => {
-    sendTemplate("master.html", "warenkorb.html", {})
-        .then(rendered => res.send(rendered));
+app.post("/warenkorb", (req, res) => {
+    var productName = req.body.cart;
+    var normalerPreis = req.body.normalPrice;
+    var specialPreis = req.body.specialOffer;
+
+    if(specialPreis){
+        res.send( specialPreis);
+    } else if(normalerPreis){
+        res.send(normalerPreis);
+    }
 });
+
 
 app.get("/checkout", (req,res) => {
     sendTemplate("master.html", "checkout.html", {})
@@ -54,23 +62,21 @@ app.get("/checkout", (req,res) => {
 
 app.post('/details',(req,res) =>{
     res.send(`
-    <form action="/warenkorb" method="POST">
-        <input type name="cart" value="${req.body.ProductDetails}" readonly="readonly">
-        <input type="submit" value="Put in basket"></input>           
-    </form>
+    <head>
+    <link rel="stylesheet" href="/css/details-stylesheet.css">
+    </head>
+    <body>
     <div>
-    <img src=/images/${req.body.ProductFoto}>
+        <form action="/warenkorb" method="POST">
+            <input type name="cart" value="${req.body.ProductDetails}" readonly="readonly">
+            <img src=/images/${req.body.ProductFoto}>
+            <h4>Description: ${req.body.ProductDescription}</h4>
+            <h4>Specielle Offerte zum Korb hinzufügen: <input name ="specialOffer" type="submit" value=${req.body.ProductSpecialOffer}></input></h4>
+            <h4>Normaler Preis zum Korb hinzufügen: <input name="normalPrice" type="submit" value=${req.body.ProductNormalPrice}></input></h4>      
+        </form>
     </div>
-    <div>
-    <h5>${req.body.ProductDescription}</p>
-    </div>
-    <div>
-    <h4>${req.body.ProductSpecialOffer}</p>
-    </div>
-    <div>
-    <h4>${req.body.ProductNormalPrice}</p>
-    </div>
-        `
+    <body>
+    `
     )
 });
 

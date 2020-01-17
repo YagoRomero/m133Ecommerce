@@ -40,16 +40,23 @@ app.get("/", function (req, res) {
 app.get("/home", function (req, res) {
     res.redirect('/');
 });
-app.get("/warenkorb", function (req, res) {
-    sendTemplate("master.html", "warenkorb.html", {})
-        .then(function (rendered) { return res.send(rendered); });
+app.post("/warenkorb", function (req, res) {
+    var productName = req.body.cart;
+    var normalerPreis = req.body.normalPrice;
+    var specialPreis = req.body.specialOffer;
+    if (specialPreis) {
+        res.send(specialPreis);
+    }
+    else if (normalerPreis) {
+        res.send(normalerPreis);
+    }
 });
 app.get("/checkout", function (req, res) {
     sendTemplate("master.html", "checkout.html", {})
         .then(function (rendered) { return res.send(rendered); });
 });
 app.post('/details', function (req, res) {
-    res.send("\n    <form action=\"/warenkorb\" method=\"POST\">\n        <input type name=\"cart\" value=\"" + req.body.ProductDetails + "\" readonly=\"readonly\">\n        <input type=\"submit\" value=\"Put in basket\"></input>           \n    </form>\n    <div>\n    <img src=/images/" + req.body.ProductFoto + ">\n    </div>\n    <div>\n    <h5>" + req.body.ProductDescription + "</p>\n    </div>\n    <div>\n    <h4>" + req.body.ProductSpecialOffer + "</p>\n    </div>\n    <div>\n    <h4>" + req.body.ProductNormalPrice + "</p>\n    </div>\n        ");
+    res.send("\n    <head>\n    <link rel=\"stylesheet\" href=\"/css/details-stylesheet.css\">\n    </head>\n    <body>\n    <div>\n        <form action=\"/warenkorb\" method=\"POST\">\n            <input type name=\"cart\" value=\"" + req.body.ProductDetails + "\" readonly=\"readonly\">\n            <img src=/images/" + req.body.ProductFoto + ">\n            <h4>Description: " + req.body.ProductDescription + "</h4>\n            <h4>Specielle Offerte zum Korb hinzuf\u00FCgen: <input name =\"specialOffer\" type=\"submit\" value=" + req.body.ProductSpecialOffer + "></input></h4>\n            <h4>Normaler Preis zum Korb hinzuf\u00FCgen: <input name=\"normalPrice\" type=\"submit\" value=" + req.body.ProductNormalPrice + "></input></h4>      \n        </form>\n    </div>\n    <body>\n    ");
 });
 app.get('/add-products.js', function (req, res) {
     res.sendFile("./add-products.js");
